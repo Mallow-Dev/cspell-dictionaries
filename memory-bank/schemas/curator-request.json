@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Curator Request",
+  "description": "A cleaned and merged request to add new words to a dictionary.",
+  "type": "object",
+  "properties": {
+    "words": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dictionary": {
+      "type": "string",
+      "enum": ["brand", "tech", "dev", "ignore", "internal", "private", "client"]
+    }
+  },
+  "required": ["words", "dictionary"]
+}

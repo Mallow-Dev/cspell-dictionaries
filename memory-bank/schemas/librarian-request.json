@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Librarian Request",
+  "description": "A request to add a new word to a dictionary.",
+  "type": "object",
+  "properties": {
+    "word": {
+      "type": "string"
+    },
+    "dictionary": {
+      "type": "string",
+      "enum": ["brand", "tech", "dev", "ignore", "internal"]
+    }
+  },
+  "required": ["word", "dictionary"]
+}

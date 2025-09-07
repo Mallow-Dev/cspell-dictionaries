@@ -1,0 +1,40 @@
+{
+  "version": "0.2",
+  "language": "en-gb",
+  "words": [],
+  "dictionaries": [
+    "project-words",
+    "marshmallow-words",
+    "dev-words",
+    "domain-words"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": "./project-words.dic",
+      "addWords": true
+    },
+    {
+      "name": "marshmallow-words",
+      "path": "./marshmallow-words.dic",
+      "addWords": true
+    },
+    {
+      "name": "dev-words",
+      "path": "./dev-words.dic",
+      "addWords": true
+      
+    },
+    {
+      "name": "domain-words",
+      "path": "./domain-words.dic",
+      "addWords": true
+    }
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    ".git/**"
+  ],
+  "ignoreWords": [],
+  "ignoreRegExpList": []
+}
