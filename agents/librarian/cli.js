@@ -3,6 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 console.log("Librarian CLI starting...");
 
@@ -18,15 +19,37 @@ const scan = () => {
     console.warn(`Could not load classification hints from ${hintsPath}: ${error.message}`);
   }
 
-  // Simulate cSpell issues for demonstration
-  const rawIssues = [
-    { word: 'MallowSpell', context: 'Project title' },
-    { word: 'develeoper', context: 'Code comment' },
-    { word: 'recieve', context: 'Documentation' },
-    { word: 'foobar', context: 'Variable name' },
-    { word: 'internall', context: 'Internal document' },
-    { word: 'unclassifiedword', context: 'Another context' },
-  ];
+  let rawIssues = [];
+  try {
+    // The command will be 'npx cspell --no-summary --no-color --reporter=json lint .'
+    const cspellOutput = execSync('npx cspell lint --no-summary --no-color --reporter json .', { encoding: 'utf8', stdio: 'pipe' });
+    const cspellResult = JSON.parse(cspellOutput);
+     rawIssues = cspellResult.issues.map(issue => ({
+      word: issue.text,
+      context: `${issue.uri}:${issue.row}:${issue.col}`
+    }));
+  } catch (error) {
+    // cspell exits with a non-zero status code if it finds issues.
+    // The JSON output is sent to stdout even on failure.
+    if (error.stdout) {
+      const cspellResult = JSON.parse(error.stdout);
+      rawIssues = cspellResult.issues.map(issue => ({
+        word: issue.text,
+        context: `${issue.uri}:${issue.row}:${issue.col}`
+      }));
+    } else {
+      // If there are no spelling issues, cspell exits with 0 and doesn't produce JSON output to stdout unless there are issues.
+      // If there's no stdout and an error, it's a real error.
+      // But if there's no error and no stdout, it means no issues were found.
+      if (!error.stderr) {
+        console.log("No spelling issues found.");
+        return; // Exit gracefully
+      }
+      console.error(`Error running cspell: ${error.stderr}`);
+      process.exit(1);
+    }
+  }
+
 
   const classifiedIssues = rawIssues.map(issue => {
     let classification = 'unclassified'; // Default classification
