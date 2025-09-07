@@ -1,0 +1,9 @@
+{
+  "hints": {
+    "brand": ["MallowSpell", "Mallow"],
+    "tech": ["recieve", "develeoper"],
+    "dev": ["foobar"],
+    "ignore": [],
+    "internal": ["internall"]
+  }
+}

@@ -1,0 +1,17 @@
+
+{
+  "name": "multi-agent-dictionary",
+  "version": "1.0.0",
+  "description": "A multi-agent system for managing a dictionary.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "bin": {
+    "mallow-librarian": "./agents/librarian/cli.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0"
+  }
+}

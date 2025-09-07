@@ -1,0 +1,1 @@
+console.log("Notary agent is running...");
