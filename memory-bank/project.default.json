@@ -1,5 +1,8 @@
 {
   "hints": {
+    "public": ["publicword"],
+    "private": ["privateword"],
+    "client": ["clientword"],
     "brand": ["MallowSpell", "Mallow"],
     "tech": ["recieve", "develeoper"],
     "dev": ["foobar"],
