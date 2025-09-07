@@ -25,7 +25,7 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,md,json,css,scss,yml,yaml}": [
-      "npx cspell --no-color"
+      "npx cspell --no-color --config cspell.json"
     ]
   }
 }
